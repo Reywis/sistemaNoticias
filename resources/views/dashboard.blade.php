@@ -4,6 +4,7 @@
             {{ __('Lista de Noticias') }}
         </h2>
     </x-slot>
+
     <style>
         .max-w-7xl {
             max-width: 105rem;
@@ -19,14 +20,38 @@
             visibility: visible;
         }
     </style>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg p-6">
+
+                <!-- BOTONES DE ACCIÓN -->
+                <div class="flex justify-between mb-4">
+                    <a href="{{ route('noticias.exportar') }}" class="btn btn-success mb-3" style="background:blue;border-radius:10px;color:white;padding:12px;">📥 Exportar a Excel</a>
+                    <form method="POST" action="{{ route('noticias.eliminarTodas') }}" onsubmit="return confirm('¿Estás seguro de que deseas eliminar todas las noticias?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Eliminar Todas</button>
+                    </form>
+
+
+
+                    <form method="POST" action="{{ route('noticias.eliminarLotes') }}" id="loteForm" onsubmit="return confirm('¿Estás seguro de que deseas eliminar las noticias seleccionadas?')">
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden" name="ids" id="selected_ids">
+                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Eliminar Seleccionados</button>
+                    </form>
+                </div>
+
                 <div class="overflow-x-auto w-full">
                     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 text-sm">
                         <thead class="bg-gray-100 dark:bg-gray-700">
                             <tr>
-                                <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Codigo</th>
+                                <th class="px-4 py-2">
+                                    <input type="checkbox" id="select_all" class="form-checkbox">
+                                </th>
+                                <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Código</th>
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Centro</th>
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Teléfonos</th>
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Curso</th>
@@ -43,6 +68,9 @@
                         <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                             @foreach ($noticias as $noticia)
                                 <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                                    <td class="px-4 py-2 text-center">
+                                        <input type="checkbox" class="form-checkbox row-checkbox" value="{{ $noticia->id }}">
+                                    </td>
                                     <td class="px-4 py-2 text-gray-800 dark:text-gray-100 copy-cell">
                                         <span>{{ $noticia->id }}</span>
                                         <span class="copy-icon" onclick="copyToClipboard('{{ $noticia->id }}')">
@@ -83,21 +111,18 @@
                                             <i class="fas fa-copy"></i>
                                         </span>
                                     </td>
-                                    <td class="px-4 py-2 text-gray-800 dark:text-gray-100">
-                                        {{ $noticia->estado }}
-                                    </td>
+                                    <td class="px-4 py-2 text-gray-800 dark:text-gray-100">{{ $noticia->estado }}</td>
                                     <td class="px-4 py-2">
-                                        <!-- Formulario para cambiar el estado -->
                                         <form method="POST" action="{{ route('noticias.actualizarEstado', $noticia->id) }}">
                                             @csrf
                                             @method('PUT')
                                             <select name="estado" class="form-select px-3 py-2 text-xs font-semibold rounded-lg w-full">
-                                                <option value="requerido" {{ $noticia->estado == 'requerido' ? 'selected' : '' }} class="bg-red-100 text-red-800" style="background:red;color:white;">Requerido</option>
-                                                <option value="en proceso" {{ $noticia->estado == 'en proceso' ? 'selected' : '' }} class="bg-yellow-100 text-yellow-800" style="background:yellow;">En Proceso</option>
-                                                <option value="listo" {{ $noticia->estado == 'listo' ? 'selected' : '' }} class="bg-green-100 text-green-800" style="background:green;color:white;">Listo</option>
-                                                <option value="verificado" {{ $noticia->estado == 'verificado' ? 'selected' : '' }} class="bg-blue-100 text-blue-800" style="background:blue;color:white;">Verificado</option>
+                                                <option value="requerido" {{ $noticia->estado == 'requerido' ? 'selected' : '' }} style="background:red;color:white;">Requerido</option>
+                                                <option value="en proceso" {{ $noticia->estado == 'en proceso' ? 'selected' : '' }} style="background:yellow;">En Proceso</option>
+                                                <option value="listo" {{ $noticia->estado == 'listo' ? 'selected' : '' }} style="background:green;color:white;">Listo</option>
+                                                <option value="verificado" {{ $noticia->estado == 'verificado' ? 'selected' : '' }} style="background:blue;color:white;">Verificado</option>
                                             </select>
-                                            <button type="submit" class="btn bg-gradient-to-r from-indigo-500 to-blue-500 text-white mt-3 px-4 py-2 rounded-lg shadow hover:bg-indigo-600" style="color:white;background:#0d6efd;">Actualizar</button>
+                                            <button type="submit" class="btn mt-3 px-4 py-2 rounded-lg shadow text-white" style="background:#0d6efd;">Actualizar</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -106,7 +131,6 @@
                     </table>
                 </div>
 
-                <!-- Paginación -->
                 <div class="mt-4">
                     {{ $noticias->links() }}
                 </div>
@@ -117,10 +141,22 @@
     <script>
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(function() {
-                alert("¡Texto copiado !");
+                alert("¡Texto copiado!");
             }).catch(function(error) {
                 alert("Error al copiar: " + error);
             });
         }
+
+        // Seleccionar todos los checkboxes
+        document.getElementById('select_all').addEventListener('change', function () {
+            const checkboxes = document.querySelectorAll('.row-checkbox');
+            checkboxes.forEach(cb => cb.checked = this.checked);
+        });
+
+        // Al enviar el formulario de eliminar por lote
+        document.getElementById('loteForm').addEventListener('submit', function (e) {
+            const selected = Array.from(document.querySelectorAll('.row-checkbox:checked')).map(cb => cb.value);
+            document.getElementById('selected_ids').value = selected.join(',');
+        });
     </script>
 </x-app-layout>

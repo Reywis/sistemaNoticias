@@ -17,6 +17,7 @@ use App\Models\Noticia;
 */
 
 Route::get('/', function () {
+    session(['tab' => 'registro']);
     return view('welcome');
 });
 
@@ -30,7 +31,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/admin/noticias', [NoticiaController::class, 'index'])->name('noticias.index');
-Route::post('/admin/noticias/{id}/estado', [NoticiaController::class, 'actualizarEstado'])->name('noticias.actualizarEstado');
+    Route::post('/admin/noticias/{id}/estado', [NoticiaController::class, 'actualizarEstado'])->name('noticias.actualizarEstadoAdmin');
+    Route::delete('/noticias/eliminar-todas', [NoticiaController::class, 'eliminarTodas'])->name('noticias.eliminarTodas');
+    Route::delete('/noticias/eliminar-lotes', [NoticiaController::class, 'eliminarLotes'])->name('noticias.eliminarLotes');
+    Route::get('/exportar-noticias', function () {
+        return Excel::download(new NoticiasExport, 'noticias.xlsx');
+    })->name('noticias.exportar');
+
 });
 Route::put('/noticias/{id}/estado', [NoticiaController::class, 'actualizarEstado'])->name('noticias.actualizarEstado');
 

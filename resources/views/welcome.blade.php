@@ -46,7 +46,6 @@
         }
     </style>
 </head>
-</head>
 <body class="bg-light">
 
 <div class="container py-5">
@@ -57,115 +56,164 @@
                     <h3 class="mb-0">Registra tu Noticia</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('noticias.store') }}" method="POST">
-                        @csrf
+                    <!-- Tabs de navegación -->
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="registrar-tab" data-bs-toggle="tab" href="#registrar" role="tab" aria-controls="registrar" aria-selected="true">Registrar Noticia</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="consultar-tab" data-bs-toggle="tab" href="#consultar" role="tab" aria-controls="consultar" aria-selected="false">Consultar Estado</a>
+                        </li>
+                    </ul>
 
-                        <div class="mb-3">
-                            <label for="centro" class="form-label">Centro</label>
-                            <input type="text" class="form-control" id="centro" name="centro" required>
+                    <div class="tab-content" id="myTabContent">
+                        <!-- Formulario Registrar Noticia -->
+                        <div class="tab-pane fade show active" id="registrar" role="tabpanel" aria-labelledby="registrar-tab">
+                            <form action="{{ route('noticias.store') }}" method="POST">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="centro" class="form-label">Centro</label>
+                                    <select class="form-select" id="centro" name="centro" required>
+                                        <option value="" disabled selected>Seleccione un centro</option>
+                                        <option value="Centro A">Centro A</option>
+                                        <option value="Centro B">Centro B</option>
+                                        <option value="Centro C">Centro C</option>
+                                        <!-- Agrega más opciones según necesites -->
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="telefonos" class="form-label">Teléfonos</label>
+                                    <input type="text" class="form-control" id="telefonos" name="telefonos" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="curso" class="form-label">Curso</label>
+                                    <input type="text" class="form-control" id="curso" name="curso" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="fecha_inicio" class="form-label">Fecha de Inicio</label>
+                                    <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="dias_curso" class="form-label">Días del Curso</label>
+                                    <input type="text" class="form-control" id="dias_curso" name="dias_curso" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="horas" class="form-label">Horas</label>
+                                    <input type="text" class="form-control" id="horas" name="horas" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="duracion" class="form-label">Duración</label>
+                                    <input type="text" class="form-control" id="duracion" name="duracion" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Correo Electrónico</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="requisitos" class="form-label">Requisitos</label>
+                                    <textarea class="form-control" id="requisitos" name="requisitos" rows="4" placeholder="Escribe aquí los requisitos del curso..." required></textarea>
+                                </div>
+
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">Enviar Noticia</button>
+                                </div>
+                            </form>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="telefonos" class="form-label">Teléfonos</label>
-                            <input type="text" class="form-control" id="telefonos" name="telefonos" required>
+                        <!-- Formulario Consultar Estado -->
+                        <div class="tab-pane fade" id="consultar" role="tabpanel" aria-labelledby="consultar-tab">
+                            <form method="GET" action="{{ route('noticias.estado') }}">
+                                <div class="mb-3">
+                                    <label for="id" class="form-label">Código de la noticia</label>
+                                    <input type="number" name="id" id="id" class="form-control" placeholder="Ej. 12" required>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-success">Consultar Estado</button>
+                                </div>
+                            </form>
+                            @if(isset($noticia))
+                                @php
+                                    $estados = ['Requerido', 'En Proceso', 'Listo', 'Verificado'];
+                                    $colores = [
+                                        'Requerido' => 'red',      // Azul
+                                        'En Proceso' => 'yellow',     // Naranja
+                                        'Listo' => 'green',          // Verde
+                                        'Verificado' => 'blue'      // Morado
+                                    ];
+
+                                    $estadoActual = ucwords(strtolower($noticia->estado));
+                                    $estadoIndex = array_search($estadoActual, $estados);
+                                @endphp
+
+                                <div class="text-center my-4">
+                                    <h5 class="mb-3">Estado Actual de la Noticia código {{$noticia->id}}</h5>
+                                    <div class="d-flex justify-content-between align-items-center px-5" style="position: relative;">
+                                        @foreach($estados as $index => $estado)
+                                            @php
+                                                $color = $colores[$estado] ?? '#ccc';
+                                                $isActive = $index <= $estadoIndex;
+                                            @endphp
+                                            <div class="text-center" style="flex: 1;">
+                                                <div class="rounded-circle"
+                                                    style="width: 30px; height: 30px; margin: 0 auto; line-height: 30px;
+                                                            background-color: {{ $isActive ? $color : '#e9ecef' }};
+                                                            color: {{ $isActive ? '#fff' : '#6c757d' }};">
+                                                    {{ $index + 1 }}
+                                                </div>
+                                                <small class="d-block mt-1"
+                                                    style="color: {{ $isActive ? $color : '#6c757d' }};
+                                                            font-weight: {{ $isActive ? 'bold' : 'normal' }};">
+                                                    {{ $estado }}
+                                                </small>
+                                            </div>
+                                            @if($index < count($estados) - 1)
+                                                <div style="flex: none; width: 25%; height: 2px;
+                                                            background-color: {{ $index < $estadoIndex ? $colores[$estados[$index]] : '#ccc' }};">
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
                         </div>
-
-                        <div class="mb-3">
-                            <label for="curso" class="form-label">Curso</label>
-                            <input type="text" class="form-control" id="curso" name="curso" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="fecha_inicio" class="form-label">Fecha de Inicio</label>
-                            <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="dias_curso" class="form-label">Días del Curso</label>
-                            <input type="text" class="form-control" id="dias_curso" name="dias_curso" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="horas" class="form-label">Horas</label>
-                            <input type="text" class="form-control" id="horas" name="horas" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="duracion" class="form-label">Duración</label>
-                            <input type="text" class="form-control" id="duracion" name="duracion" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Correo Electrónico</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="requisitos" class="form-label">Requisitos</label>
-                            <textarea class="form-control" id="requisitos" name="requisitos" rows="4" placeholder="Escribe aquí los requisitos del curso..." required></textarea>
-                        </div>
-
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Enviar Noticia</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Consultar estado por ID -->
-<div class="card shadow-sm mb-4">
-    <div class="card-header bg-success text-white text-center">
-        <h4 class="mb-0">Consultar Estado</h4>
-    </div>
-    <div class="card-body">
-        <form method="GET" action="{{ route('noticias.estado') }}">
-            <div class="mb-3">
-                <label for="id" class="form-label">Código de la noticia</label>
-                <input type="number" name="id" id="id" class="form-control" placeholder="Ej. 12" required>
-            </div>
-            <div class="d-grid">
-                <button type="submit" class="btn btn-success">Consultar Estado</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-@if(isset($noticia))
-    @php
-        $estados = ['Requerido', 'En Proceso', 'Listo', 'Verificado'];
-        $estadoActual = ucwords(strtolower($noticia->estado));
-        $estadoIndex = array_search($estadoActual, $estados);
-    @endphp
-
-    <div class="text-center my-4">
-        <h5 class="mb-3">Estado Actual de la Noticia codigo {{$noticia->id}}</h5>
-        <div class="d-flex justify-content-between align-items-center px-5" style="position: relative;">
-            @foreach($estados as $index => $estado)
-                <div class="text-center" style="flex: 1;">
-                    <div class="rounded-circle {{ $index <= $estadoIndex ? 'bg-success text-white' : 'bg-light text-muted' }}"
-                         style="width: 30px; height: 30px; margin: 0 auto; line-height: 30px;">
-                        {{ $index + 1 }}
                     </div>
-                    <small class="d-block mt-1 {{ $index <= $estadoIndex ? 'text-success fw-bold' : 'text-muted' }}">
-                        {{ $estado }}
-                    </small>
                 </div>
-                @if($index < count($estados) - 1)
-                    <div style="flex: none; width: 25%; height: 2px; background-color: {{ $index < $estadoIndex ? '#28a745' : '#ccc' }};"></div>
-                @endif
-            @endforeach
-        </div>
-    </div>
-@endif
-
+            </div>
 
             <p class="text-center mt-3 text-muted">Gracias por contribuir con tu información.</p>
         </div>
     </div>
 </div>
 
-
-
 <!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const newsId = urlParams.get('id'); // Obtén el id de la URL
+
+        if (newsId) {
+            // Si hay un id en la URL, activa el tab "Consultar Estado"
+            const consultarTab = new bootstrap.Tab(document.getElementById('consultar-tab'));
+            consultarTab.show();
+
+            // Rellenar el campo con el id
+            document.querySelector('input[name="id"]').value = newsId;
+
+            // Opcional: Enviar la consulta para obtener el estado (no se debe enviar el formulario automáticamente)
+            // Si ya existe el parámetro "id", la vista se debe cargar con el estado de la noticia
+        }
+    };
+</script>
+
 </body>
 </html>
