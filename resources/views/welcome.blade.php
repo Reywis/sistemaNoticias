@@ -47,7 +47,31 @@
     </style>
 </head>
 <body class="bg-light">
+    <div class="modal fade" id="noticiaGuardadaModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+              <h5 class="modal-title" id="modalTitle">Noticia Registrada</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+              Tu noticia se ha cargado correctamente. Hemos enviado los datos a tu correo electrónico.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal">Aceptar</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      @if(session('success'))
+<script>
+    window.onload = function() {
+        var modal = new bootstrap.Modal(document.getElementById('noticiaGuardadaModal'));
+        modal.show();
+    };
+</script>
+@endif
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-7">
