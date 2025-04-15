@@ -51,7 +51,7 @@
     <div class="modal fade" id="noticiaGuardadaModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-header bg-success text-white">
+            <div class="modal-header bg-success text-white" style="background:#5FCFDE;">
               <h5 class="modal-title" id="modalTitle">Noticia Registrada</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
@@ -59,7 +59,7 @@
               Tu noticia se ha cargado correctamente. Hemos enviado los datos a tu correo electrónico.
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-bs-dismiss="modal">Aceptar</button>
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal" style="background:#5FCFDE;">Aceptar</button>
             </div>
           </div>
         </div>
