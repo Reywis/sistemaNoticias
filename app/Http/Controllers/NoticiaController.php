@@ -162,13 +162,9 @@ class NoticiaController extends Controller
             if ($noticia !== null) {
                 // Aquí accedes a las propiedades de $noticia de manera segura
                 // Enviar el correo
-               /* Mail::raw($contenido, function ($message) use ($noticia) {
+                Mail::raw($contenido, function ($message) use ($noticia) {
                     $message->to($noticia->email)
-                            ->subject('Confirmación de solicitud de publicación');
-                });*/
-                Mail::send([], [], function ($message) use ($contenido) {
-                    $message->to($noticia->email)
-                            ->subject('Confirmación de Solicitud de Publicación')
+                            ->subject('Confirmación de solicitud de publicación')
                             ->setBody($contenido, 'text/html'); // 👈 IMPORTANTE: HTML aquí
                 });
                 // Mail::raw('Ya hemos registrado tu solicitud. Te informaremos cuando se suba tu noticia.', function ($message) use ($noticia) {
