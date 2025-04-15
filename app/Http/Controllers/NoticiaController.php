@@ -24,20 +24,7 @@ class NoticiaController extends Controller
         $requestData['estado'] = 'Requerido'; // Estado inicial
         $noticia = Noticia::create($requestData);
         session(['tab' => 'registro']);
-        // Armar el contenido del correo con los datos de la noticia
-          /*  $contenido = "Hola, hemos recibido tu solicitud de publicación. Te avisaremos cuando tu noticia cambie de estado.\n\n";
-            $contenido .= "Aquí está el resumen de tu solicitud:\n";
-            $contenido .= "-------------------------------------\n";
-            $contenido .= "Codigo de consulta: {$noticia->id}\n";
-            $contenido .= "Curso: {$noticia->curso}\n";
-            $contenido .= "Requisitos: {$noticia->requisitos}\n";
-            $contenido .= "Telefonos: {$noticia->Telefonos}\n";
-            $contenido .= "Fecha de publicación: {$noticia->fecha_inicio}\n";
-            $contenido .= "Estado actual: {$noticia->estado}\n";
-            $contenido .= "-------------------------------------\n";
-            $contenido .= "Gracias por usar nuestro sistema.";*/
-
-            if ($noticia !== null) {
+                if ($noticia !== null) {
                 // Aquí accedes a las propiedades de $noticia de manera segura
                 // Enviar el correo
                 Mail::send('emails.template',[ 'noticia' => $noticia], function ($message) use ($noticia) {

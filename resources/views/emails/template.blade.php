@@ -95,7 +95,7 @@
                 </tr>
                 <tr>
                     <th>Teléfonos</th>
-                    <td>{{$noticia->Telefonos}}</td>
+                    <td>{{$noticia->telefonos}}</td>
                 </tr>
                 <tr>
                     <th>Fecha de publicación</th>
