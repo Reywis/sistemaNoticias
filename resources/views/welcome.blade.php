@@ -47,6 +47,9 @@
     </style>
 </head>
 <body class="bg-light">
+    <button class="btn btn-primary" onclick="new bootstrap.Modal(document.getElementById('noticiaGuardadaModal')).show();">
+        Probar modal
+    </button>
     <div class="modal fade" id="noticiaGuardadaModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -65,13 +68,13 @@
       </div>
 
       @if(session('success'))
-<script>
-    window.onload = function() {
-        var modal = new bootstrap.Modal(document.getElementById('noticiaGuardadaModal'));
-        modal.show();
-    };
-</script>
-@endif
+    <script>
+        window.onload = function() {
+            var modal = new bootstrap.Modal(document.getElementById('noticiaGuardadaModal'));
+            modal.show();
+        };
+    </script>
+    @endif
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-7">
