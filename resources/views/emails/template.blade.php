@@ -72,7 +72,7 @@
 
     <div class='email-container'>
         <div class='email-header'>
-            <img src='https://www.tu-sitio.com/logo.png' alt='Logo'>
+            <img src="/images/logo-black.png" alt="logo" class="flex h-8" style="width:200px;height:auto;">
             <h2>Confirmación de Solicitud de Publicación</h2>
         </div>
 
