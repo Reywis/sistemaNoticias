@@ -75,10 +75,12 @@
                                     <label for="centro" class="form-label">Centro</label>
                                     <select class="form-select" id="centro" name="centro" required>
                                         <option value="" disabled selected>Seleccione un centro</option>
-                                        <option value="Centro A">Centro A</option>
-                                        <option value="Centro B">Centro B</option>
-                                        <option value="Centro C">Centro C</option>
-                                        <!-- Agrega más opciones según necesites -->
+                                        <option value="Regional Sur">Regional Sur</option>
+                                        <option value="Regional Centro">Regional Centro</option>
+                                        <option value="Regional Centro CFPIM">Regional Centro CFPIM</option>
+                                        <option value="Regional Litoral Atlántico">Regional Litoral Atlántico</option>
+                                        <option value="Regional Noroccidental">Regional Noroccidental</option>
+                                                                             <!-- Agrega más opciones según necesites -->
                                     </select>
                                 </div>
 
