@@ -47,9 +47,7 @@
     </style>
 </head>
 <body class="bg-light">
-    <button class="btn btn-primary" onclick="new bootstrap.Modal(document.getElementById('noticiaGuardadaModal')).show();">
-        Probar modal
-    </button>
+
     <div class="modal fade" id="noticiaGuardadaModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
