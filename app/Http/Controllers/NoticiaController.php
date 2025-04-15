@@ -40,7 +40,7 @@ class NoticiaController extends Controller
             if ($noticia !== null) {
                 // Aquí accedes a las propiedades de $noticia de manera segura
                 // Enviar el correo
-                Mail::send('emails.template',[ 'codigo' => $noticia], function ($message) use ($noticia) {
+                Mail::send('emails.template',[ 'noticia' => $noticia], function ($message) use ($noticia) {
                     $message->to($noticia->email)
                             ->subject('Confirmación de solicitud de publicación');
                 });
