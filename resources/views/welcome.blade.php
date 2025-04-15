@@ -225,6 +225,11 @@
 
 <script>
     window.onload = function() {
+        @if(session('success'))
+            var modal = new bootstrap.Modal(document.getElementById('noticiaGuardadaModal'));
+            modal.show();
+        @endif
+
         const urlParams = new URLSearchParams(window.location.search);
         const newsId = urlParams.get('id'); // Obtén el id de la URL
 
@@ -241,6 +246,8 @@
         }
     };
 </script>
+
+
 
 </body>
 </html>
