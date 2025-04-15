@@ -42,7 +42,8 @@ class NoticiaController extends Controller
                 Log::error('La noticia no se encontró o es null');
             }
 
-        return redirect()->back()->with('success', 'Noticia creada exitosamente.');
+       // return redirect()->back()->with('success', 'Noticia creada exitosamente.');
+       return redirect()->route('welcome')->with('success', 'Noticia creada exitosamente.');
     }
 
     public function buscarEstado(Request $request)
