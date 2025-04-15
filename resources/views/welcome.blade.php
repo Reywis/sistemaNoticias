@@ -36,10 +36,10 @@
             font-weight: bold;
         }
         .step.active .circle {
-            background-color: #0d6efd;
+            background-color: #5FCFDE;
         }
         .step.completed .circle {
-            background-color: #198754;
+            background-color: #5FCFDE;
         }
         .step .label {
             font-size: 0.9rem;
@@ -52,8 +52,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-7">
             <div class="card shadow-sm mb-4">
-                <div class="card-header bg-primary text-white text-center">
-                    <h3 class="mb-0">Registra tu Noticia</h3>
+                <div class="card-header bg-primary text-white text-center" style="background:#5FCFDE !important;">
+                    <h3 class="mb-0" >Registra tu Noticia</h3>
                 </div>
                 <div class="card-body">
                     <!-- Tabs de navegación -->
@@ -125,7 +125,7 @@
                                 </div>
 
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary">Enviar Noticia</button>
+                                    <button type="submit" class="btn btn-primary" style="background:#5FCFDE !important;">Enviar Noticia</button>
                                 </div>
                             </form>
                         </div>
@@ -138,7 +138,7 @@
                                     <input type="number" name="id" id="id" class="form-control" placeholder="Ej. 12" required>
                                 </div>
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-success">Consultar Estado</button>
+                                    <button type="submit" class="btn btn-success" style="background:#5FCFDE !important;">Consultar Estado</button>
                                 </div>
                             </form>
                             @if(isset($noticia))

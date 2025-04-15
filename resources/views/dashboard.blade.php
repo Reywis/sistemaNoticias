@@ -13,7 +13,7 @@
             visibility: hidden;
             cursor: pointer;
             font-size: 1.25rem;
-            color: #4A90E2;
+            color: #5FCFDE;
             transition: visibility 0s, opacity 0.2s ease;
         }
         .copy-cell:hover .copy-icon {
@@ -28,7 +28,7 @@
 
                 <!-- BOTONES DE ACCIÓN -->
                 <div class="flex justify-between mb-4">
-                    <a href="{{ route('noticias.exportar') }}" class="btn btn-success mb-3" style="background:blue;border-radius:10px;color:white;padding:12px;">📥 Exportar a Excel</a>
+                    <a href="{{ route('noticias.exportar') }}" class="btn btn-success mb-3" style="background:#5FCFDE;border-radius:10px;color:white;padding:12px;">📥 Exportar a Excel</a>
                     <form method="POST" action="{{ route('noticias.eliminarTodas') }}" onsubmit="return confirm('¿Estás seguro de que deseas eliminar todas las noticias?')">
                         @csrf
                         @method('DELETE')
@@ -41,7 +41,7 @@
                         @csrf
                         @method('DELETE')
                         <input type="hidden" name="ids" id="selected_ids">
-                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" style="background:red;border-radius:10px;color:white;padding:12px;">Eliminar Seleccionados</button>
+                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" style="background:#5FCFDE;border-radius:10px;color:white;padding:12px;">Eliminar Seleccionados</button>
                     </form>
                 </div>
 
@@ -123,7 +123,7 @@
                                                 <option value="listo" {{ $noticia->estado == 'listo' ? 'selected' : '' }} style="background:green;color:white;">Listo</option>
                                                 <option value="verificado" {{ $noticia->estado == 'verificado' ? 'selected' : '' }} style="background:blue;color:white;">Verificado</option>
                                             </select>
-                                            <button type="submit" class="btn mt-3 px-4 py-2 rounded-lg shadow text-white" style="background:#0d6efd;">Actualizar</button>
+                                            <button type="submit" class="btn mt-3 px-4 py-2 rounded-lg shadow text-white" style="background:#5FCFDE;">Actualizar</button>
                                         </form>
                                     </td>
                                 </tr>

@@ -33,7 +33,7 @@
             color: #333;
         }
         .email-content h2 {
-            color: #4CAF50;
+            color: #5FCFDE;
             font-size: 18px;
         }
         .email-table {
@@ -48,7 +48,7 @@
             border-bottom: 1px solid #ddd;
         }
         .email-table th {
-            background-color: #4CAF50;
+            background-color: #5FCFDE;
             color: white;
         }
         .email-footer {
@@ -58,7 +58,7 @@
             margin-top: 20px;
         }
         .btn {
-            background-color: #4CAF50;
+            background-color: #5FCFDE;
             color: white;
             text-decoration: none;
             padding: 10px 20px;
@@ -83,27 +83,27 @@
             <table class='email-table'>
                 <tr>
                     <th>Código de consulta</th>
-                    <td>{$noticia->id}</td>
+                    <td>{{$noticia->id}}</td>
                 </tr>
                 <tr>
                     <th>Curso</th>
-                    <td>{$noticia->curso}</td>
+                    <td>{{$noticia->curso}}</td>
                 </tr>
                 <tr>
                     <th>Requisitos</th>
-                    <td>{$noticia->requisitos}</td>
+                    <td>{{$noticia->requisitos}}</td>
                 </tr>
                 <tr>
                     <th>Teléfonos</th>
-                    <td>{$noticia->Telefonos}</td>
+                    <td>{{$noticia->Telefonos}}</td>
                 </tr>
                 <tr>
                     <th>Fecha de publicación</th>
-                    <td>{$noticia->fecha_inicio}</td>
+                    <td>{{$noticia->fecha_inicio}}</td>
                 </tr>
                 <tr>
                     <th>Estado actual</th>
-                    <td>{$noticia->estado}</td>
+                    <td>{{$noticia->estado}}</td>
                 </tr>
             </table>
 
