@@ -1,4 +1,9 @@
 <x-guest-layout>
+    <style>
+        svg.w-20.h-20.fill-current.text-gray-500 {
+            display: none;
+        }
+    </style>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <img src="/images/logo-black.png" alt="logo" class="flex h-8" style="width:600px;height:auto;">
