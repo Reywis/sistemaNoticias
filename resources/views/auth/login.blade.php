@@ -1,7 +1,7 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
-
+    <img src="/images/logo-black.png" alt="logo" class="flex h-8" style="width:600px;height:auto;">
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
