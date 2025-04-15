@@ -19,6 +19,7 @@
         .copy-cell:hover .copy-icon {
             visibility: visible;
         }
+
     </style>
 
     <div class="py-12">
@@ -40,7 +41,7 @@
                         @csrf
                         @method('DELETE')
                         <input type="hidden" name="ids" id="selected_ids">
-                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Eliminar Seleccionados</button>
+                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" style="background:red;border-radius:10px;color:white;padding:12px;">Eliminar Seleccionados</button>
                     </form>
                 </div>
 
