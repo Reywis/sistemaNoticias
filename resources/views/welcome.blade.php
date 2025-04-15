@@ -51,7 +51,7 @@
     <div class="modal fade" id="noticiaGuardadaModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-header bg-success text-white" style="background:#5FCFDE;">
+            <div class="modal-header bg-success text-white" style="background:#5FCFDE !important;">
               <h5 class="modal-title" id="modalTitle">Noticia Registrada</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
