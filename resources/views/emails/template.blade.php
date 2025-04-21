@@ -72,7 +72,7 @@
 
     <div class='email-container'>
         <div class='email-header'>
-            <img src="/images/logo-black.png" alt="logo" class="flex h-8" style="width:200px;height:auto;">
+            <img src="images/logo-black.png" alt="logo" class="flex h-8" style="width:200px;height:auto;">
             <h2>Confirmación de Solicitud de Publicación</h2>
         </div>
 
@@ -88,6 +88,10 @@
                 <tr>
                     <th>Curso</th>
                     <td>{{$noticia->curso}}</td>
+                </tr>
+                <tr>
+                    <th>Forma Curso</th>
+                    <td>{{$noticia->forma_curso}}</td>
                 </tr>
                 <tr>
                     <th>Requisitos</th>

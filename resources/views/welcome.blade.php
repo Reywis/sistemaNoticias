@@ -78,7 +78,7 @@
         <div class="col-md-8 col-lg-7">
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-primary text-white text-center" style="background:#5FCFDE !important;">
-                    <h3 class="mb-0" >Registra tu Noticia</h3>
+                    <h3 class="mb-0" >Registra tu Curso</h3>
                 </div>
                 <div class="card-body">
                     <!-- Tabs de navegación -->
@@ -118,7 +118,14 @@
                                     <label for="curso" class="form-label">Curso</label>
                                     <input type="text" class="form-control" id="curso" name="curso" required>
                                 </div>
-
+                                <div class="mb-3">
+                                    <label for="centro" class="form-label">Tipo de curso</label>
+                                    <select class="form-select" id="forma_curso" name="forma_curso" required>
+                                        <option value="" disabled selected>Seleccione una opcion</option>
+                                        <option value="Presencial">Presencial</option>
+                                        <option value="En Linea">En Linea</option>
+                                    </select>
+                                </div>
                                 <div class="mb-3">
                                     <label for="fecha_inicio" class="form-label">Fecha de Inicio</label>
                                     <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required>
