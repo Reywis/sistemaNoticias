@@ -110,7 +110,7 @@ class NoticiaController extends Controller
             // Enviar correo al usuario
             Mail::send('emails.templateEstado',[ 'noticia' => $noticia], function ($message) use ($noticia) {
                 $message->to($noticia->email)
-                        ->subject('Actualizacion del estadi de la publicación');
+                        ->subject('Actualizacion del estado de la publicación');
             });
 
             // Redirigir con mensaje de éxito
