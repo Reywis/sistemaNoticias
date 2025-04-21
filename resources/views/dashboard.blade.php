@@ -56,6 +56,7 @@
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Centro</th>
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Teléfonos</th>
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Curso</th>
+                                <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Forma Curso</th>
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Fecha de inicio</th>
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Días</th>
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Horas</th>
@@ -93,6 +94,12 @@
                                     <td class="px-4 py-2 text-gray-800 dark:text-gray-100 truncate max-w-xs" title="{{ $noticia->curso }}">
                                         <span>{{ $noticia->curso }}</span>
                                         <span class="copy-icon" onclick="copyToClipboard('{{ $noticia->curso }}')">
+                                            <i class="fas fa-copy"></i>
+                                        </span>
+                                    </td>
+                                    <td class="px-4 py-2 text-gray-800 dark:text-gray-100 truncate max-w-xs" title="{{ $noticia->forma_curso }}">
+                                        <span>{{ $noticia->forma_curso }}</span>
+                                        <span class="copy-icon" onclick="copyToClipboard('{{ $noticia->forma_curso }}')">
                                             <i class="fas fa-copy"></i>
                                         </span>
                                     </td>
