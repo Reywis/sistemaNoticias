@@ -19,12 +19,124 @@
         .copy-cell:hover .copy-icon {
             visibility: visible;
         }
+        .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      padding: 30px;
+    }
 
+    .card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-header h3 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    .card-header i {
+      font-size: 25px;
+    }
+
+    .card p {
+      margin-top: 10px;
+      font-size: 15px;
+      color: #555;
+    }
+
+    /* Colores por estado */
+    .verde { background-color: #d4edda; }
+    .rojo { background-color: #f8d7da; }
+    .amarillo { background-color: #fff3cd; }
+    .azul { background-color: #d1ecf1; }
+
+    /* Colores de íconos */
+    .verde .card-header i { color: #28a745; }
+    .rojo .card-header i { color: #dc3545; }
+    .amarillo .card-header i { color: #ffc107; }
+    .azul .card-header i { color: #17a2b8; }
     </style>
 
+        <div class="container">
+            <div class="card verde">
+              <div class="card-header">
+                <h3>Requerido</h3>
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <p style="font-size:25px;font-weight:bold;">{{$conteos['Requerido']}}</p>
+            </div>
+
+            <div class="card rojo">
+              <div class="card-header">
+                <h3>En Proceso </h3>
+                <i class="fas fa-exclamation-triangle"></i>
+              </div>
+              <p style="font-size:25px;font-weight:bold;">{{$conteos['en proceso']}}</p>
+            </div>
+
+            <div class="card amarillo">
+              <div class="card-header">
+                <h3>Listo</h3>
+                <i class="fas fa-exclamation-circle"></i>
+              </div>
+              <p style="font-size:25px;font-weight:bold;">{{$conteos['listo']}}</p>
+            </div>
+
+            <div class="card azul">
+              <div class="card-header">
+                <h3>Verificado</h3>
+                <i class="fas fa-info-circle"></i>
+              </div>
+              <p style="font-size:25px;font-weight:bold;">{{$conteos['verificado']}}</p>
+            </div>
+          </div>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg p-6">
+                <div style="display: inline-block; float: right; margin-bottom: 20px;">
+                    <!-- FILTRO MES -->
+                    <select id="filtroMes" onchange="filtrarFecha()" style="padding:6px; margin-right:8px;">
+                      <option value="">Todos los meses</option>
+                      @for($m = 1; $m <= 12; $m++)
+                      <option value="{{ $m }}">
+                        {{ \Carbon\Carbon::create(2020, $m, 1)->translatedFormat('F') }}
+                      </option>
+                      @endfor
+                    </select>
+
+                    <!-- FILTRO AÑO -->
+                    <select id="filtroYear" onchange="filtrarFecha()" style="padding:6px;">
+                      <option value="">Todos los años</option>
+                      @php
+                        $years = $noticias->pluck('fecha_inicio')
+                                          ->map(fn($f) => \Carbon\Carbon::parse($f)->year)
+                                          ->unique()
+                                          ->sortDesc();
+                      @endphp
+                      @foreach($years as $y)
+                        <option value="{{ $y }}">{{ $y }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                <div style="margin-bottom: 20px;">
+                    <h2 style="padding-bottom:15px;">Estado del Arte</h2>
+                    <button onclick="filtrarEstado('todos')" style="border-radius:8px;background: gray; color: white; padding: 8px 12px; margin-right: 8px;">Todos</button>
+                    <button onclick="filtrarEstado('requerido')" style="border-radius:8px;background: red; color: white; padding: 8px 12px; margin-right: 8px;">Requerido</button>
+                    <button onclick="filtrarEstado('en proceso')" style="border-radius:8px;background: yellow; color: black; padding: 8px 12px; margin-right: 8px;">En Proceso</button>
+                    <button onclick="filtrarEstado('listo')" style="border-radius:8px;background: green; color: white; padding: 8px 12px; margin-right: 8px;">Listo</button>
+                    <button onclick="filtrarEstado('verificado')" style="border-radius:8px;background: blue; color: white; padding: 8px 12px;">Verificado</button>
+                </div>
+
 
                 <!-- BOTONES DE ACCIÓN -->
                 <div class="flex justify-between mb-4">
@@ -46,6 +158,7 @@
                 </div>
 
                 <div class="overflow-x-auto w-full">
+
                     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 text-sm">
                         <thead class="bg-gray-100 dark:bg-gray-700">
                             <tr>
@@ -69,12 +182,25 @@
                         </thead>
                         <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                             @foreach ($noticias as $noticia)
-                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                            @php $dt = \Carbon\Carbon::parse($noticia->fecha_inicio); @endphp
+                                {{-- <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition"> --}}
+                                    <tr data-mes="{{ $dt->month }}" data-year="{{ $dt->year }}" data-estado="{{ strtolower($noticia->estado) }}"
+                                        @if($noticia->estado == 'requerido')
+                                            style="background: red; color: white;color:white;"
+                                        @elseif($noticia->estado == 'en proceso')
+                                            style="background: yellow; color: black;"
+                                        @elseif($noticia->estado == 'listo')
+                                            style="background: green; color: white !important;"
+                                        @elseif($noticia->estado == 'verificado')
+                                            style="background: blue; color: white;"
+                                        @endif
+                                    >
+                                    {{-- <tr class=" hover:bg-gray-50 dark:hover:bg-gray-700 transition"> --}}
                                     <td class="px-4 py-2 text-center">
                                         <input type="checkbox" class="form-checkbox row-checkbox" value="{{ $noticia->id }}">
                                     </td>
                                     <td class="px-4 py-2 text-gray-800 dark:text-gray-100 copy-cell">
-                                        <span>{{ $noticia->id }}</span>
+                                        <span>{{ $noticia->estado }}</span>
                                         <span class="copy-icon" onclick="copyToClipboard('{{ $noticia->id }}')">
                                             <i class="fas fa-copy"></i>
                                         </span>
@@ -125,10 +251,10 @@
                                             @csrf
                                             @method('PUT')
                                             <select name="estado" class="form-select px-3 py-2 text-xs font-semibold rounded-lg w-full">
-                                                <option value="requerido" {{ $noticia->estado == 'requerido' ? 'selected' : '' }} style="background:red;color:white;">Requerido</option>
+                                                <option value="requerido" {{ $noticia->estado == 'requerido' ? 'selected' : '' }} style="background:red;color:white !important;">Requerido</option>
                                                 <option value="en proceso" {{ $noticia->estado == 'en proceso' ? 'selected' : '' }} style="background:yellow;">En Proceso</option>
-                                                <option value="listo" {{ $noticia->estado == 'listo' ? 'selected' : '' }} style="background:green;color:white;">Listo</option>
-                                                <option value="verificado" {{ $noticia->estado == 'verificado' ? 'selected' : '' }} style="background:blue;color:white;">Verificado</option>
+                                                <option value="listo" {{ $noticia->estado == 'listo' ? 'selected' : '' }} style="background:green;color:white !important;">Listo</option>
+                                                <option value="verificado" {{ $noticia->estado == 'verificado' ? 'selected' : '' }} style="background:blue;color:white !important;">Verificado</option>
                                             </select>
                                             <button type="submit" class="btn mt-3 px-4 py-2 rounded-lg shadow text-white" style="background:#5FCFDE;">Actualizar</button>
                                         </form>
@@ -167,4 +293,57 @@
             document.getElementById('selected_ids').value = selected.join(',');
         });
     </script>
+<script>
+    function filtrarEstado(estadoSeleccionado) {
+        const filas = document.querySelectorAll("tbody tr");
+
+        filas.forEach(fila => {
+            const estadoFila = fila.getAttribute("data-estado");
+
+            if (estadoSeleccionado === 'todos') {
+                fila.style.display = 'table-row'; // ← esto asegura que se vea
+            } else if (estadoFila === estadoSeleccionado) {
+                fila.style.display = 'table-row';
+            } else {
+                fila.style.display = 'none';
+            }
+        });
+    }
+    </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const filtroMes = document.getElementById('filtroMes');
+      const filtroAño = document.getElementById('filtroYear');
+
+      // Llamamos a la función de filtrado inicial
+      filtrarFecha(filtroMes.value, filtroAño.value);
+
+      // Escuchamos los cambios en los selectores
+      filtroMes.addEventListener('change', function () {
+        filtrarFecha(filtroMes.value, filtroAño.value);
+      });
+
+      filtroAño.addEventListener('change', function () {
+        filtrarFecha(filtroMes.value, filtroAño.value);
+      });
+    });
+
+    function filtrarFecha(mes, año) {
+      const filas = document.querySelectorAll('tbody tr');
+      filas.forEach(fila => {
+        const filaMes = fila.getAttribute('data-mes');
+        const filaAño = fila.getAttribute('data-year');
+
+        console.log(`Filtrando fila: mes=${filaMes}, año=${filaAño} | filtro: mes=${mes}, año=${año}`);
+
+        // Comprobamos si el mes y el año de la fila coinciden con lo seleccionado
+        if ((mes === '' || filaMes === mes) && (año === '' || filaAño === año)) {
+          fila.style.display = 'table-row'; // Mostramos la fila
+        } else {
+          fila.style.display = 'none'; // Ocultamos la fila
+        }
+      });
+    }
+  </script>
+
 </x-app-layout>

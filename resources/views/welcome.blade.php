@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registramos tu noticia</title>
+    <title>Solicitud de arte</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -78,13 +78,13 @@
         <div class="col-md-8 col-lg-7">
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-primary text-white text-center" style="background:#5FCFDE !important;">
-                    <h3 class="mb-0" >Registra tu Curso</h3>
+                    <h3 class="mb-0" >Solicita tu Arte</h3>
                 </div>
                 <div class="card-body">
                     <!-- Tabs de navegación -->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="registrar-tab" data-bs-toggle="tab" href="#registrar" role="tab" aria-controls="registrar" aria-selected="true">Registrar Noticia</a>
+                            <a class="nav-link active" id="registrar-tab" data-bs-toggle="tab" href="#registrar" role="tab" aria-controls="registrar" aria-selected="true">Registrar Arte</a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="consultar-tab" data-bs-toggle="tab" href="#consultar" role="tab" aria-controls="consultar" aria-selected="false">Consultar Estado</a>
@@ -96,7 +96,12 @@
                         <div class="tab-pane fade show active" id="registrar" role="tabpanel" aria-labelledby="registrar-tab">
                             <form action="{{ route('noticias.store') }}" method="POST">
                                 @csrf
+
                                 <div class="mb-3">
+                                    <label for="centro" class="form-label">Centro</label>
+                                    <input type="text" class="form-control" id="centro" name="centro" required>
+                                </div>
+                                {{-- <div class="mb-3">
                                     <label for="centro" class="form-label">Centro</label>
                                     <select class="form-select" id="centro" name="centro" required>
                                         <option value="" disabled selected>Seleccione un centro</option>
@@ -107,7 +112,7 @@
                                         <option value="Regional Noroccidental">Regional Noroccidental</option>
                                                                              <!-- Agrega más opciones según necesites -->
                                     </select>
-                                </div>
+                                </div> --}}
 
                                 <div class="mb-3">
                                     <label for="telefonos" class="form-label">Teléfonos</label>
@@ -152,12 +157,17 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label for="descripcion_curso" class="form-label">Descripcion del curso</label>
+                                    <textarea class="form-control" id="descripcion_curso" name="descripcion_curso" rows="4" placeholder="Escribe aquí  la descripcion del curso..." required></textarea>
+                                </div>
+
+                                <div class="mb-3">
                                     <label for="requisitos" class="form-label">Requisitos</label>
                                     <textarea class="form-control" id="requisitos" name="requisitos" rows="4" placeholder="Escribe aquí los requisitos del curso..." required></textarea>
                                 </div>
 
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary" style="background:#5FCFDE !important;">Enviar Noticia</button>
+                                    <button type="submit" class="btn btn-primary" style="background:#5FCFDE !important;">Enviar Solicitud</button>
                                 </div>
                             </form>
                         </div>
@@ -254,7 +264,24 @@
     };
 </script>
 
+<script>
+    document.getElementById('fecha_inicio').addEventListener('change', function() {
+        const fechaInicioInput = document.getElementById('fecha_inicio');
+        const fechaInicio = new Date(fechaInicioInput.value);
+        const hoy = new Date();
 
+        // Normalizar para comparar solo fechas (sin horas)
+        hoy.setHours(0, 0, 0, 0);
+        fechaInicio.setHours(0, 0, 0, 0);
+
+        const diferenciaEnDias = (fechaInicio - hoy) / (1000 * 60 * 60 * 24);
+
+        if (diferenciaEnDias < 3) {
+            alert("⚠️ Advertencia: su noticia no puede ser enviada porque debe de tener 3 días de antelación.");
+            fechaInicioInput.value = ""; // Limpiar el campo de fecha
+        }
+    });
+    </script>
 
 </body>
 </html>

@@ -73,7 +73,7 @@
     <div class='email-container'>
         <div class='email-header'>
             <img src="https://artespublicitarios.infop.hn/images/logo-black.png" alt="logo" class="flex h-8" style="width:200px;height:auto;">
-            <h2>Actualizacion del estadi de la publicación</h2>
+            <h2>Actualizacion del estado de la publicación</h2>
         </div>
 
         <div class='email-content'>
