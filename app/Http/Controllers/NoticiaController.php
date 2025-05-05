@@ -65,6 +65,7 @@ class NoticiaController extends Controller
     public function index()
     {
         $noticias = Noticia::orderBy('created_at', 'desc')->get();
+
         return view('admin.noticias.index', compact('noticias'));
     }
 

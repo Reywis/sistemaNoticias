@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Noticia extends Model
 {
     use HasFactory;
-    protected $fillable = ['centro','telefonos','curso','fecha_inicio','dias_curso','horas','duracion','requisitos','estado','email','forma_curso'];
+    protected $fillable = ['centro','telefonos','curso','fecha_inicio','dias_curso','horas','duracion','requisitos','estado','email','forma_curso','descripcion_curso'];
 }

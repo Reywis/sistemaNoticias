@@ -23,8 +23,20 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::get('/dashboard', function () {
+    $estados = [
+        'Requerido' => 0,
+        'listo' => 0,
+        'verificado' => 0,
+        'en proceso' => 0,
+    ];
     $noticias = Noticia::orderBy('id', 'asc')->paginate(20);
-    return view('dashboard',compact('noticias'));
+    $conteos = Noticia::select('estado', DB::raw('count(*) as total'))
+        ->groupBy('estado')
+        ->pluck('total', 'estado')
+        ->toArray();
+    $conteos = array_merge($estados, $conteos);
+
+    return view('dashboard',compact('noticias','conteos'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 

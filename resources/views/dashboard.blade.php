@@ -73,7 +73,7 @@
                 <h3>Requerido</h3>
                 <i class="fas fa-check-circle"></i>
               </div>
-              <p style="font-size:25px;font-weight:bold;">{{$conteos['Requerido']}}</p>
+              <p style="font-size:25px;font-weight:bold;">{{ $conteos['Requerido'] ?? 0 }}</p>
             </div>
 
             <div class="card rojo">
@@ -81,7 +81,7 @@
                 <h3>En Proceso </h3>
                 <i class="fas fa-exclamation-triangle"></i>
               </div>
-              <p style="font-size:25px;font-weight:bold;">{{$conteos['en proceso']}}</p>
+              <p style="font-size:25px;font-weight:bold;">{{$conteos['en proceso'] ?? 0 }}</p>
             </div>
 
             <div class="card amarillo">
@@ -89,7 +89,7 @@
                 <h3>Listo</h3>
                 <i class="fas fa-exclamation-circle"></i>
               </div>
-              <p style="font-size:25px;font-weight:bold;">{{$conteos['listo']}}</p>
+              <p style="font-size:25px;font-weight:bold;">{{$conteos['listo'] ?? 0 }}</p>
             </div>
 
             <div class="card azul">
@@ -97,7 +97,7 @@
                 <h3>Verificado</h3>
                 <i class="fas fa-info-circle"></i>
               </div>
-              <p style="font-size:25px;font-weight:bold;">{{$conteos['verificado']}}</p>
+              <p style="font-size:25px;font-weight:bold;">{{$conteos['verificado'] ?? 0 }}</p>
             </div>
           </div>
     <div class="py-12">
@@ -139,9 +139,9 @@
 
 
                 <!-- BOTONES DE ACCIÓN -->
-                <div class="flex justify-between mb-4">
-                    <a href="{{ route('noticias.exportar') }}" class="btn btn-success mb-3" style="background:#5FCFDE;border-radius:10px;color:white;padding:12px;">📥 Exportar a Excel</a>
-                    <form method="POST" action="{{ route('noticias.eliminarTodas') }}" onsubmit="return confirm('¿Estás seguro de que deseas eliminar todas las noticias?')">
+                <div class="flex mb-4">
+                    <a href="{{ route('noticias.exportar') }}" class="btn btn-success mb-3" style="margin-left:15px !important;background:#5FCFDE;border-radius:10px;color:white;padding:12px;">📥 Exportar a Excel</a>
+                    <form method="POST" action="{{ route('noticias.eliminarTodas') }}" onsubmit="return confirm('¿Estás seguro de que deseas eliminar todas las noticias?')" style="margin-left:15px !important;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Eliminar Todas</button>
@@ -149,7 +149,7 @@
 
 
 
-                    <form method="POST" action="{{ route('noticias.eliminarLotes') }}" id="loteForm" onsubmit="return confirm('¿Estás seguro de que deseas eliminar las noticias seleccionadas?')">
+                    <form method="POST" action="{{ route('noticias.eliminarLotes') }}" id="loteForm" onsubmit="return confirm('¿Estás seguro de que deseas eliminar las noticias seleccionadas?')" style="margin-left:15px !important;">
                         @csrf
                         @method('DELETE')
                         <input type="hidden" name="ids" id="selected_ids">
