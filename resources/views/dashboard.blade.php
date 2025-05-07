@@ -68,7 +68,7 @@
     </style>
 
         <div class="container">
-            <div class="card verde">
+            <div class="card rojo">
               <div class="card-header">
                 <h3>Requerido</h3>
                 <i class="fas fa-check-circle"></i>
@@ -76,7 +76,7 @@
               <p style="font-size:25px;font-weight:bold;">{{ $conteos['Requerido'] ?? 0 }}</p>
             </div>
 
-            <div class="card rojo">
+            <div class="card amarillo">
               <div class="card-header">
                 <h3>En Proceso </h3>
                 <i class="fas fa-exclamation-triangle"></i>
@@ -84,7 +84,7 @@
               <p style="font-size:25px;font-weight:bold;">{{$conteos['en proceso'] ?? 0 }}</p>
             </div>
 
-            <div class="card amarillo">
+            <div class="card azul">
               <div class="card-header">
                 <h3>Listo</h3>
                 <i class="fas fa-exclamation-circle"></i>
@@ -92,7 +92,7 @@
               <p style="font-size:25px;font-weight:bold;">{{$conteos['listo'] ?? 0 }}</p>
             </div>
 
-            <div class="card azul">
+            <div class="card verde">
               <div class="card-header">
                 <h3>Verificado</h3>
                 <i class="fas fa-info-circle"></i>
@@ -133,8 +133,8 @@
                     <button onclick="filtrarEstado('todos')" style="border-radius:8px;background: gray; color: white; padding: 8px 12px; margin-right: 8px;">Todos</button>
                     <button onclick="filtrarEstado('requerido')" style="border-radius:8px;background: red; color: white; padding: 8px 12px; margin-right: 8px;">Requerido</button>
                     <button onclick="filtrarEstado('en proceso')" style="border-radius:8px;background: yellow; color: black; padding: 8px 12px; margin-right: 8px;">En Proceso</button>
-                    <button onclick="filtrarEstado('listo')" style="border-radius:8px;background: green; color: white; padding: 8px 12px; margin-right: 8px;">Listo</button>
-                    <button onclick="filtrarEstado('verificado')" style="border-radius:8px;background: blue; color: white; padding: 8px 12px;">Verificado</button>
+                    <button onclick="filtrarEstado('listo')" style="border-radius:8px;background: blue; color: white; padding: 8px 12px; margin-right: 8px;">Listo</button>
+                    <button onclick="filtrarEstado('verificado')" style="border-radius:8px;background: green; color: white; padding: 8px 12px;">Verificado</button>
                 </div>
 
 
@@ -190,9 +190,9 @@
                                         @elseif($noticia->estado == 'en proceso')
                                             style="background: yellow; color: black;"
                                         @elseif($noticia->estado == 'listo')
-                                            style="background: green; color: white !important;"
+                                            style="background: blue; color: white !important;"
                                         @elseif($noticia->estado == 'verificado')
-                                            style="background: blue; color: white;"
+                                            style="background: green; color: white;"
                                         @endif
                                     >
                                     {{-- <tr class=" hover:bg-gray-50 dark:hover:bg-gray-700 transition"> --}}
@@ -253,8 +253,8 @@
                                             <select name="estado" class="form-select px-3 py-2 text-xs font-semibold rounded-lg w-full">
                                                 <option value="requerido" {{ $noticia->estado == 'requerido' ? 'selected' : '' }} style="background:red;color:white !important;">Requerido</option>
                                                 <option value="en proceso" {{ $noticia->estado == 'en proceso' ? 'selected' : '' }} style="background:yellow;">En Proceso</option>
-                                                <option value="listo" {{ $noticia->estado == 'listo' ? 'selected' : '' }} style="background:green;color:white !important;">Listo</option>
-                                                <option value="verificado" {{ $noticia->estado == 'verificado' ? 'selected' : '' }} style="background:blue;color:white !important;">Verificado</option>
+                                                <option value="listo" {{ $noticia->estado == 'listo' ? 'selected' : '' }} style="background:blue;color:white !important;">Listo</option>
+                                                <option value="verificado" {{ $noticia->estado == 'verificado' ? 'selected' : '' }} style="background:green;color:white !important;">Verificado</option>
                                             </select>
                                             <button type="submit" class="btn mt-3 px-4 py-2 rounded-lg shadow text-white" style="background:#5FCFDE;">Actualizar</button>
                                         </form>

@@ -176,7 +176,7 @@
                         <div class="tab-pane fade" id="consultar" role="tabpanel" aria-labelledby="consultar-tab">
                             <form method="GET" action="{{ route('noticias.estado') }}">
                                 <div class="mb-3">
-                                    <label for="id" class="form-label">Código de la noticia</label>
+                                    <label for="id" class="form-label">Código del arte</label>
                                     <input type="number" name="id" id="id" class="form-control" placeholder="Ej. 12" required>
                                 </div>
                                 <div class="d-grid">
@@ -189,8 +189,8 @@
                                     $colores = [
                                         'Requerido' => 'red',      // Azul
                                         'En Proceso' => 'yellow',     // Naranja
-                                        'Listo' => 'green',          // Verde
-                                        'Verificado' => 'blue'      // Morado
+                                        'Listo' => 'blue',          // Verde
+                                        'Verificado' => 'green'      // Morado
                                     ];
 
                                     $estadoActual = ucwords(strtolower($noticia->estado));
@@ -198,7 +198,7 @@
                                 @endphp
 
                                 <div class="text-center my-4">
-                                    <h5 class="mb-3">Estado Actual de la Noticia código {{$noticia->id}}</h5>
+                                    <h5 class="mb-3">Estado Actual del Arte código {{$noticia->id}}</h5>
                                     <div class="d-flex justify-content-between align-items-center px-5" style="position: relative;">
                                         @foreach($estados as $index => $estado)
                                             @php
