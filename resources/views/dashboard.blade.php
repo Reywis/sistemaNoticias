@@ -185,7 +185,7 @@
                             @php $dt = \Carbon\Carbon::parse($noticia->fecha_inicio); @endphp
                                 {{-- <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition"> --}}
                                     <tr data-mes="{{ $dt->month }}" data-year="{{ $dt->year }}" data-estado="{{ strtolower($noticia->estado) }}"
-                                        @if($noticia->estado == 'requerido')
+                                        @if($noticia->estado == 'Requerido')
                                             style="background: red; color: white;color:white;"
                                         @elseif($noticia->estado == 'en proceso')
                                             style="background: yellow; color: black;"
