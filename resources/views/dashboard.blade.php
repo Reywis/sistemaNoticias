@@ -73,7 +73,7 @@
                 <h3>Requerido</h3>
                 <i class="fas fa-check-circle"></i>
               </div>
-              <p style="font-size:25px;font-weight:bold;">{{ $conteos['Requerido'] ?? 0 }}</p>
+              <p style="font-size:25px;font-weight:bold;">{{ $conteos['requerido'] ?? 0 }}</p>
             </div>
 
             <div class="card amarillo">
