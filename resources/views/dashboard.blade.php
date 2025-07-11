@@ -187,6 +187,8 @@
                                     <tr data-mes="{{ $dt->month }}" data-year="{{ $dt->year }}" data-estado="{{ strtolower($noticia->estado) }}"
                                         @if($noticia->estado == 'requerido')
                                             style="background: #f8d7da; color: black;color:black;"
+                                        @elseif($noticia->estado == 'Requerido')
+                                            style="background: #f8d7da; color: black;color:black;"
                                         @elseif($noticia->estado == 'en proceso')
                                             style="background: #fff3cd; color: black;"
                                         @elseif($noticia->estado == 'listo')
