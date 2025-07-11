@@ -130,11 +130,11 @@
                   </div>
                 <div style="margin-bottom: 20px;">
                     <h2 style="padding-bottom:15px;">Estado del Arte</h2>
-                    <button onclick="filtrarEstado('todos')" style="border-radius:8px;background: gray; color: white; padding: 8px 12px; margin-right: 8px;">Todos</button>
-                    <button onclick="filtrarEstado('requerido')" style="border-radius:8px;background: #f8d7da; color: white; padding: 8px 12px; margin-right: 8px;">Requerido</button>
+                    <button onclick="filtrarEstado('todos')" style="border-radius:8px;background: gray; color: black; padding: 8px 12px; margin-right: 8px;">Todos</button>
+                    <button onclick="filtrarEstado('requerido')" style="border-radius:8px;background: #f8d7da; color: black; padding: 8px 12px; margin-right: 8px;">Requerido</button>
                     <button onclick="filtrarEstado('en proceso')" style="border-radius:8px;background: #fff3cd; color: black; padding: 8px 12px; margin-right: 8px;">En Proceso</button>
-                    <button onclick="filtrarEstado('listo')" style="border-radius:8px;background: #d1ecf1; color: white; padding: 8px 12px; margin-right: 8px;">Listo</button>
-                    <button onclick="filtrarEstado('verificado')" style="border-radius:8px;background: #d4edda; color: white; padding: 8px 12px;">Verificado</button>
+                    <button onclick="filtrarEstado('listo')" style="border-radius:8px;background: #d1ecf1; color: black; padding: 8px 12px; margin-right: 8px;">Listo</button>
+                    <button onclick="filtrarEstado('verificado')" style="border-radius:8px;background: #d4edda; color: black; padding: 8px 12px;">Verificado</button>
                 </div>
 
 
@@ -186,13 +186,13 @@
                                 {{-- <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition"> --}}
                                     <tr data-mes="{{ $dt->month }}" data-year="{{ $dt->year }}" data-estado="{{ strtolower($noticia->estado) }}"
                                         @if($noticia->estado == 'Requerido')
-                                            style="background: #f8d7da; color: white;color:white;"
+                                            style="background: #f8d7da; color: black;color:black;"
                                         @elseif($noticia->estado == 'en proceso')
                                             style="background: #fff3cd; color: black;"
                                         @elseif($noticia->estado == 'listo')
-                                            style="background: #d1ecf1; color: white !important;"
+                                            style="background: #d1ecf1; color: black !important;"
                                         @elseif($noticia->estado == 'verificado')
-                                            style="background: #d4edda; color: white;"
+                                            style="background: #d4edda; color: black;"
                                         @endif
                                     >
                                     {{-- <tr class=" hover:bg-gray-50 dark:hover:bg-gray-700 transition"> --}}
