@@ -61,10 +61,10 @@
     .azul { background-color: #d1ecf1; }
 
     /* Colores de íconos */
-    .verde .card-header i { color: #28a745; }
-    .rojo .card-header i { color: #dc3545; }
-    .amarillo .card-header i { color: #ffc107; }
-    .azul .card-header i { color: #17a2b8; }
+    .verde .card-header i { color: #d4edda; }
+    .rojo .card-header i { color: #f8d7da; }
+    .amarillo .card-header i { color: #fff3cd; }
+    .azul .card-header i { color: #d1ecf1; }
     </style>
 
         <div class="container">
