@@ -294,21 +294,37 @@
         });
     </script>
 <script>
+    // function filtrarEstado(estadoSeleccionado) {
+    //     const filas = document.querySelectorAll("tbody tr");
+
+    //     filas.forEach(fila => {
+    //         const estadoFila = fila.getAttribute("data-estado");
+
+    //         if (estadoSeleccionado === 'todos') {
+    //             fila.style.display = 'table-row'; // ← esto asegura que se vea
+    //         } else if (estadoFila === estadoSeleccionado) {
+    //             fila.style.display = 'table-row';
+    //         } else {
+    //             fila.style.display = 'none';
+    //         }
+    //     });
+    // }
     function filtrarEstado(estadoSeleccionado) {
-        const filas = document.querySelectorAll("tbody tr");
+    const filas = document.querySelectorAll("tbody tr");
 
-        filas.forEach(fila => {
-            const estadoFila = fila.getAttribute("data-estado");
+    filas.forEach(fila => {
+        const estadoFila = fila.getAttribute("data-estado");
+        console.log(`Seleccionado: ${estadoSeleccionado} | Fila: ${estadoFila}`);
 
-            if (estadoSeleccionado === 'todos') {
-                fila.style.display = 'table-row'; // ← esto asegura que se vea
-            } else if (estadoFila === estadoSeleccionado) {
-                fila.style.display = 'table-row';
-            } else {
-                fila.style.display = 'none';
-            }
-        });
-    }
+        if (estadoSeleccionado === 'todos') {
+            fila.style.display = 'table-row';
+        } else if (estadoFila === estadoSeleccionado) {
+            fila.style.display = 'table-row';
+        } else {
+            fila.style.display = 'none';
+        }
+    });
+}
     </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
