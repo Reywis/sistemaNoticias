@@ -61,10 +61,10 @@
     .azul { background-color: #d1ecf1; }
 
     /* Colores de íconos */
-    .verde .card-header i { color: #d4edda; }
-    .rojo .card-header i { color: #f8d7da; }
-    .amarillo .card-header i { color: #fff3cd; }
-    .azul .card-header i { color: #d1ecf1; }
+    .verde .card-header i { color: #28a745; }
+    .rojo .card-header i { color: #dc3545; }
+    .amarillo .card-header i { color: #ffc107; }
+    .azul .card-header i { color: #17a2b8; }
     </style>
 
         <div class="container">
@@ -131,10 +131,10 @@
                 <div style="margin-bottom: 20px;">
                     <h2 style="padding-bottom:15px;">Estado del Arte</h2>
                     <button onclick="filtrarEstado('todos')" style="border-radius:8px;background: gray; color: white; padding: 8px 12px; margin-right: 8px;">Todos</button>
-                    <button onclick="filtrarEstado('requerido')" style="border-radius:8px;background: red; color: white; padding: 8px 12px; margin-right: 8px;">Requerido</button>
-                    <button onclick="filtrarEstado('en proceso')" style="border-radius:8px;background: yellow; color: black; padding: 8px 12px; margin-right: 8px;">En Proceso</button>
-                    <button onclick="filtrarEstado('listo')" style="border-radius:8px;background: blue; color: white; padding: 8px 12px; margin-right: 8px;">Listo</button>
-                    <button onclick="filtrarEstado('verificado')" style="border-radius:8px;background: green; color: white; padding: 8px 12px;">Verificado</button>
+                    <button onclick="filtrarEstado('requerido')" style="border-radius:8px;background: #f8d7da; color: white; padding: 8px 12px; margin-right: 8px;">Requerido</button>
+                    <button onclick="filtrarEstado('en proceso')" style="border-radius:8px;background: #fff3cd; color: black; padding: 8px 12px; margin-right: 8px;">En Proceso</button>
+                    <button onclick="filtrarEstado('listo')" style="border-radius:8px;background: #d1ecf1; color: white; padding: 8px 12px; margin-right: 8px;">Listo</button>
+                    <button onclick="filtrarEstado('verificado')" style="border-radius:8px;background: #d4edda; color: white; padding: 8px 12px;">Verificado</button>
                 </div>
 
 
@@ -186,13 +186,13 @@
                                 {{-- <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition"> --}}
                                     <tr data-mes="{{ $dt->month }}" data-year="{{ $dt->year }}" data-estado="{{ strtolower($noticia->estado) }}"
                                         @if($noticia->estado == 'Requerido')
-                                            style="background: red; color: white;color:white;"
+                                            style="background: #f8d7da; color: white;color:white;"
                                         @elseif($noticia->estado == 'en proceso')
-                                            style="background: yellow; color: black;"
+                                            style="background: #fff3cd; color: black;"
                                         @elseif($noticia->estado == 'listo')
-                                            style="background: blue; color: white !important;"
+                                            style="background: #d1ecf1; color: white !important;"
                                         @elseif($noticia->estado == 'verificado')
-                                            style="background: green; color: white;"
+                                            style="background: #d4edda; color: white;"
                                         @endif
                                     >
                                     {{-- <tr class=" hover:bg-gray-50 dark:hover:bg-gray-700 transition"> --}}
@@ -251,10 +251,10 @@
                                             @csrf
                                             @method('PUT')
                                             <select name="estado" class="form-select px-3 py-2 text-xs font-semibold rounded-lg w-full">
-                                                <option value="requerido" {{ $noticia->estado == 'requerido' ? 'selected' : '' }} style="background:red;color:white !important;">Requerido</option>
-                                                <option value="en proceso" {{ $noticia->estado == 'en proceso' ? 'selected' : '' }} style="background:yellow;">En Proceso</option>
-                                                <option value="listo" {{ $noticia->estado == 'listo' ? 'selected' : '' }} style="background:blue;color:white !important;">Listo</option>
-                                                <option value="verificado" {{ $noticia->estado == 'verificado' ? 'selected' : '' }} style="background:green;color:white !important;">Verificado</option>
+                                                <option value="requerido" {{ $noticia->estado == 'requerido' ? 'selected' : '' }} style="background:#f8d7da;color:white !important;">Requerido</option>
+                                                <option value="en proceso" {{ $noticia->estado == 'en proceso' ? 'selected' : '' }} style="background:#fff3cd;">En Proceso</option>
+                                                <option value="listo" {{ $noticia->estado == 'listo' ? 'selected' : '' }} style="background:#d1ecf1;color:white !important;">Listo</option>
+                                                <option value="verificado" {{ $noticia->estado == 'verificado' ? 'selected' : '' }} style="background:#d4edda;color:white !important;">Verificado</option>
                                             </select>
                                             <button type="submit" class="btn mt-3 px-4 py-2 rounded-lg shadow text-white" style="background:#5FCFDE;">Actualizar</button>
                                         </form>
