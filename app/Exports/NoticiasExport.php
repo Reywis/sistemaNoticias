@@ -19,7 +19,8 @@ class NoticiasExport implements FromCollection, WithHeadings
             'horas',
             'duracion',
             'email',
-            'requisitos'
+            'requisitos',
+            'descripcion_curso'
         )->get();
     }
 
@@ -35,7 +36,8 @@ class NoticiasExport implements FromCollection, WithHeadings
             'Horas',
             'Duración',
             'Correo Electrónico',
-            'Requisitos'
+            'Requisitos',
+            'Descripcion del Curso'
         ];
     }
 }
