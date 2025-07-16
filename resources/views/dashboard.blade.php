@@ -149,7 +149,7 @@
                     <button onclick="location.href='?estado=requerido'" style="border-radius:8px; background: {{ $active === 'requerido' ? '#f8d7da' : '#f8d7da' }}; color: black; padding: 8px 12px; margin-right: 8px;">Requerido</button>
                     <button onclick="location.href='?estado=en proceso'" style="border-radius:8px; background: {{ $active === 'en proceso' ? '#fff3cd' : '#fff3cd' }}; color: black; padding: 8px 12px; margin-right: 8px;">En Proceso</button>
                     <button onclick="location.href='?estado=listo'" style="border-radius:8px; background: {{ $active === 'listo' ? '#d1ecf1' : '#d1ecf1' }}; color: black; padding: 8px 12px; margin-right: 8px;">Listo</button>
-                    <button onclick="location.href='?estado=verificado'" style="border-radius:8px; background: {{ $active === 'verificado' ? '#d4edda' : '#fff' }}; color: black; padding: 8px 12px;">Verificado</button>
+                    <button onclick="location.href='?estado=verificado'" style="border-radius:8px; background: {{ $active === 'verificado' ? '#d4edda' : '#d4edda' }}; color: black; padding: 8px 12px;">Verificado</button>
                 </div>
 
 
