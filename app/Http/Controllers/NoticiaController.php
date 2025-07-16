@@ -62,9 +62,33 @@ class NoticiaController extends Controller
         return view('welcome', compact('noticia'));
     }
 
-    public function index()
+   /* public function index()
     {
         $noticias = Noticia::orderBy('created_at', 'desc')->get();
+
+        return view('admin.noticias.index', compact('noticias'));
+    }*/
+
+    public function index(Request $request)
+    {
+        $query = Noticia::query();
+
+        // Filtro por estado
+        if ($request->filled('estado') && $request->estado !== 'todos') {
+            $query->whereRaw('LOWER(estado) = ?', [strtolower($request->estado)]);
+        }
+
+        // Filtro por mes
+        if ($request->filled('mes')) {
+            $query->whereMonth('fecha_inicio', $request->mes);
+        }
+
+        // Filtro por año
+        if ($request->filled('año')) {
+            $query->whereYear('fecha_inicio', $request->año);
+        }
+
+        $noticias = $query->orderBy('created_at', 'desc')->paginate(10); // <- paginación real
 
         return view('admin.noticias.index', compact('noticias'));
     }
