@@ -63,11 +63,35 @@ class NoticiaController extends Controller
         return view('welcome', compact('noticia'));
     }
 
-    public function index()
+       public function index(Request $request)
     {
-        $noticias = Noticia::orderBy('created_at', 'desc')->get();
+        $estadoFiltro = $request->query('estado');
 
-        return view('admin.noticias.index', compact('noticias'));
+        $estados = [
+            'requerido' => 0,
+            'listo' => 0,
+            'verificado' => 0,
+            'en proceso' => 0,
+        ];
+
+        // Conteo total por estado para mostrar en las tarjetas (si quieres incluir sólo las noticias filtradas, quita ->where... )
+        $conteosRaw = Noticia::select('estado', DB::raw('count(*) as total'))
+            ->groupBy('estado')
+            ->pluck('total', 'estado')
+            ->toArray();
+
+        // Mezclamos para asegurar que estén todos los estados en conteos
+        $conteos = array_merge($estados, array_change_key_case($conteosRaw, CASE_LOWER));
+
+        // Consulta principal con filtro por estado si existe
+        $query = Noticia::query();
+        if ($estadoFiltro && $estadoFiltro !== 'todos') {
+            $query->whereRaw('LOWER(estado) = ?', [strtolower($estadoFiltro)]);
+        }
+
+        $noticias = $query->orderBy('id', 'asc')->paginate(20)->withQueryString();
+
+        return view('dashboard', compact('noticias', 'conteos', 'estadoFiltro'));
     }
 
      public function dashobarodindex(Request $request)
