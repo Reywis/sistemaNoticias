@@ -128,20 +128,30 @@
                       @endforeach
                     </select>
                   </div>
+                {{-- <div style="margin-bottom: 20px;">
+                    <h2 style="padding-bottom:15px;">Estado del Arte</h2>
+                    <button onclick="filtrarEstado('todos')" style="border-radius:8px;background: gray; color: black; padding: 8px 12px; margin-right: 8px;">Todos</button>
+                    <button onclick="filtrarEstado('requerido')" style="border-radius:8px;background: #f8d7da; color: black; padding: 8px 12px; margin-right: 8px;">Requerido</button>
+                    <button onclick="filtrarEstado('en proceso')" style="border-radius:8px;background: #fff3cd; color: black; padding: 8px 12px; margin-right: 8px;">En Proceso</button>
+                    <button onclick="filtrarEstado('listo')" style="border-radius:8px;background: #d1ecf1; color: black; padding: 8px 12px; margin-right: 8px;">Listo</button>
+                    <button onclick="filtrarEstado('verificado')" style="border-radius:8px;background: #d4edda; color: black; padding: 8px 12px;">Verificado</button>
+                </div> --}}
+
                 <div style="margin-bottom: 20px;">
-                        <h2 style="padding-bottom:15px;">Estado del Arte</h2>
+                    <h2 style="padding-bottom:15px;">Estado del Arte</h2>
 
-                        @php
-                            // Para saber qué estado está activo y dar estilo
-                            $active = $estadoFiltro ?? 'todos';
-                        @endphp
+                    @php
+                        // Para saber qué estado está activo y dar estilo
+                        $active = $estadoFiltro ?? 'todos';
+                    @endphp
 
-                        <button onclick="location.href='?estado=todos'" style="border-radius:8px; background: {{ $active === 'todos' ? 'black' : 'gray' }}; color: white; padding: 8px 12px; margin-right: 8px;">Todos</button>
-                        <button onclick="location.href='?estado=requerido'" style="border-radius:8px; background: {{ $active === 'requerido' ? '#f8d7da' : '#fff' }}; color: black; padding: 8px 12px; margin-right: 8px;">Requerido</button>
-                        <button onclick="location.href='?estado=en proceso'" style="border-radius:8px; background: {{ $active === 'en proceso' ? '#fff3cd' : '#fff' }}; color: black; padding: 8px 12px; margin-right: 8px;">En Proceso</button>
-                        <button onclick="location.href='?estado=listo'" style="border-radius:8px; background: {{ $active === 'listo' ? '#d1ecf1' : '#fff' }}; color: black; padding: 8px 12px; margin-right: 8px;">Listo</button>
-                        <button onclick="location.href='?estado=verificado'" style="border-radius:8px; background: {{ $active === 'verificado' ? '#d4edda' : '#fff' }}; color: black; padding: 8px 12px;">Verificado</button>
-                    </div>
+                    <button onclick="location.href='?estado=todos'" style="border-radius:8px; background: {{ $active === 'todos' ? 'black' : 'gray' }}; color: white; padding: 8px 12px; margin-right: 8px;">Todos</button>
+                    <button onclick="location.href='?estado=requerido'" style="border-radius:8px; background: {{ $active === 'requerido' ? '#f8d7da' : '#f8d7da' }}; color: black; padding: 8px 12px; margin-right: 8px;">Requerido</button>
+                    <button onclick="location.href='?estado=en proceso'" style="border-radius:8px; background: {{ $active === 'en proceso' ? '#fff3cd' : '#fff3cd' }}; color: black; padding: 8px 12px; margin-right: 8px;">En Proceso</button>
+                    <button onclick="location.href='?estado=listo'" style="border-radius:8px; background: {{ $active === 'listo' ? '#d1ecf1' : '#d1ecf1' }}; color: black; padding: 8px 12px; margin-right: 8px;">Listo</button>
+                    <button onclick="location.href='?estado=verificado'" style="border-radius:8px; background: {{ $active === 'verificado' ? '#d4edda' : '#fff' }}; color: black; padding: 8px 12px;">Verificado</button>
+                </div>
+
 
                 <!-- BOTONES DE ACCIÓN -->
                 <div class="flex mb-4">
