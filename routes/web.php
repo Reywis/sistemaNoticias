@@ -21,7 +21,7 @@ Route::get('/', function () {
     session(['tab' => 'registro']);
     return view('welcome');
 })->name('welcome');
-Route::get('/dashboard', [NoticiaController::class, 'dashobarodindex'])->name('dashboard.index');
+Route::get('/dashboard', [NoticiaController::class, 'dashobarodindex'])->name('dashboard');
 
 /*Route::get('/dashboard', function () {
     $estados = [
