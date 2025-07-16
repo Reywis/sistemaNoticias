@@ -155,11 +155,11 @@
 
                 <!-- BOTONES DE ACCIÓN -->
                 <div class="flex mb-4">
-                    <a href="{{ route('noticias.exportar') }}" class="btn btn-success mb-3" style="margin-left:15px !important;background:#5FCFDE;border-radius:10px;color:white;padding:12px;">📥 Exportar a Excel</a>
+                    <a href="{{ route('noticias.exportar') }}" class="btn btn-success mb-3" style="margin-left:15px !important;background:#d1ecf1;border-radius:10px;color:white;padding:12px;">📥 Exportar a Excel</a>
                     <form method="POST" action="{{ route('noticias.eliminarTodas') }}" onsubmit="return confirm('¿Estás seguro de que deseas eliminar todas las noticias?')" style="margin-left:15px !important;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Eliminar Todas</button>
+                        <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700" style="background:#f8d7da;color:black;">Eliminar Todas</button>
                     </form>
 
 
@@ -168,7 +168,7 @@
                         @csrf
                         @method('DELETE')
                         <input type="hidden" name="ids" id="selected_ids">
-                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" style="background:#5FCFDE;border-radius:10px;color:white;padding:12px;">Eliminar Seleccionados</button>
+                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" style="background:#f8d7da;border-radius:10px;color:black;padding:12px;">Eliminar Seleccionados</button>
                     </form>
                 </div>
 
