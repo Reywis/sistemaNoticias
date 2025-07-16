@@ -69,6 +69,43 @@ class NoticiaController extends Controller
         return view('admin.noticias.index', compact('noticias'));
     }
 
+     public function dashobarodindex(Request $request)
+    {
+        $estadosBase = [
+            'requerido' => 0,
+            'listo' => 0,
+            'verificado' => 0,
+            'en proceso' => 0,
+        ];
+
+        $query = Noticia::query();
+
+        // Filtros
+        if ($request->filled('estado') && $request->estado != 'todos') {
+            $query->where('estado', $request->estado);
+        }
+
+        if ($request->filled('mes')) {
+            $query->whereMonth('fecha_inicio', $request->mes);
+        }
+
+        if ($request->filled('año')) {
+            $query->whereYear('fecha_inicio', $request->año);
+        }
+
+        $noticias = $query->orderBy('id', 'asc')->paginate(10)->withQueryString();
+
+        // Conteos de estados para mostrar resumen
+        $conteosRaw = Noticia::select('estado', DB::raw('count(*) as total'))
+            ->groupBy('estado')
+            ->pluck('total', 'estado')
+            ->toArray();
+
+        $conteos = array_merge($estadosBase, $conteosRaw);
+
+        return view('dashboard', compact('noticias', 'conteos'));
+    }
+
     public function actualizarEstado(Request $request, $id)
     {
        /* $noticia = Noticia::findOrFail($id);

@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NoticiaController;
 use App\Models\Noticia;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\DB;
 use App\Exports\NoticiasExport;
 /*
 |--------------------------------------------------------------------------
@@ -22,61 +21,25 @@ Route::get('/', function () {
     session(['tab' => 'registro']);
     return view('welcome');
 })->name('welcome');
+Route::get('/dashboard', [NoticiaController::class, 'dashobarodindex'])->name('dashboard.index');
 
-// Route::get('/dashboard', function () {
-//     $estados = [
-//         'Requerido' => 0,
-//         'listo' => 0,
-//         'verificado' => 0,
-//         'en proceso' => 0,
-//     ];
-//     $noticias = Noticia::orderBy('id', 'asc')->paginate(20);
-//     $conteos = Noticia::select('estado', DB::raw('count(*) as total'))
-//         ->groupBy('estado')
-//         ->pluck('total', 'estado')
-//         ->toArray();
-//     $conteos = array_merge($estados, $conteos);
-
-//     return view('dashboard',compact('noticias','conteos'));
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/dashboard', function (Request $request) {
+/*Route::get('/dashboard', function () {
     $estados = [
-        'requerido' => 0,
+        'Requerido' => 0,
         'listo' => 0,
         'verificado' => 0,
         'en proceso' => 0,
     ];
-
-    $query = Noticia::query();
-
-    // Filtro por estado (solo si no es 'todos' o vacío)
-    if ($request->filled('estado') && $request->estado != 'todos') {
-        $query->where('estado', $request->estado);
-    }
-
-    // Filtro por mes
-    if ($request->filled('mes')) {
-        $query->whereMonth('fecha_inicio', $request->mes);
-    }
-
-    // Filtro por año
-    if ($request->filled('año')) {
-        $query->whereYear('fecha_inicio', $request->año);
-    }
-
-    $noticias = $query->orderBy('id', 'asc')->paginate(20)->withQueryString();
-
-    // Conteo estados para mostrar en dashboard
-    $conteosRaw = Noticia::select('estado', DB::raw('count(*) as total'))
+    $noticias = Noticia::orderBy('id', 'asc')->paginate(20);
+    $conteos = Noticia::select('estado', DB::raw('count(*) as total'))
         ->groupBy('estado')
         ->pluck('total', 'estado')
         ->toArray();
+    $conteos = array_merge($estados, $conteos);
 
-    $conteos = array_merge($estados, $conteosRaw);
+    return view('dashboard',compact('noticias','conteos'));
+})->middleware(['auth', 'verified'])->name('dashboard');*/
 
-    return view('dashboard', compact('noticias', 'conteos'));
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
