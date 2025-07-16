@@ -67,9 +67,7 @@
                     <select id="filtroMes" style="padding:6px; margin-right:8px;">
                         <option value="">Todos los meses</option>
                         @for($m = 1; $m <= 12; $m++)
-                            <option value="{{ $m }}" {{ request('mes') == $m ? 'selected' : '' }}>
-                                {{ \Carbon\Carbon::create(2020, $m, 1)->translatedFormat('F') }}
-                            </option>
+                            <option value="{{ $m }}">{{ \Carbon\Carbon::create(2020, $m, 1)->translatedFormat('F') }}</option>
                         @endfor
                     </select>
                     <select id="filtroYear" style="padding:6px;">
@@ -78,7 +76,7 @@
                             $years = $noticias->pluck('fecha_inicio')->map(fn($f) => \Carbon\Carbon::parse($f)->year)->unique()->sortDesc();
                         @endphp
                         @foreach($years as $y)
-                            <option value="{{ $y }}" {{ request('año') == $y ? 'selected' : '' }}>{{ $y }}</option>
+                            <option value="{{ $y }}">{{ $y }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -86,40 +84,57 @@
                 <div style="margin-bottom: 20px;">
                     <h2 style="padding-bottom:15px;">Estado del Arte</h2>
                     <button onclick="redirigirConFiltros('todos')">Todos</button>
-                    <button onclick="redirigirConFiltros('requerido')">Requerido</button>
-                    <button onclick="redirigirConFiltros('en proceso')">En Proceso</button>
-                    <button onclick="redirigirConFiltros('listo')">Listo</button>
-                    <button onclick="redirigirConFiltros('verificado')">Verificado</button>
+                <button onclick="redirigirConFiltros('requerido')">Requerido</button>
+                <button onclick="redirigirConFiltros('en proceso')">En Proceso</button>
+                <button onclick="redirigirConFiltros('listo')">Listo</button>
+                <button onclick="redirigirConFiltros('verificado')">Verificado</button>
+
                 </div>
 
-                @include('admin.noticias.tabla')
+                <!-- Aquí va la tabla, que no repito por brevedad -->
+                @include('noticias.tabla') <!-- asumiendo que la tabla está en un archivo parcial -->
 
                 <div class="mt-4">
-                    {{ $noticias->appends(request()->except('page'))->links() }}
+                    {{ $noticias->links() }}
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        function redirigirConFiltros(estado) {
+        let estadoActual = 'todos';
+
+        function aplicarFiltros() {
+            const filas = document.querySelectorAll('tbody tr');
             const mes = document.getElementById('filtroMes').value;
-            const año = document.getElementById('filtroYear').value;
+            const ano = document.getElementById('filtroYear').value;
 
-            const params = new URLSearchParams();
-            if (estado !== 'todos') params.set('estado', estado);
-            if (mes) params.set('mes', mes);
-            if (año) params.set('año', año);
+            filas.forEach(fila => {
+                const filaEstado = fila.getAttribute('data-estado')?.trim().toLowerCase();
+                const filaMes = fila.getAttribute('data-mes');
+                const filaAno = fila.getAttribute('data-year');
 
-            window.location.href = `?${params.toString()}`;
+                const coincideEstado = (estadoActual === 'todos') || (filaEstado === estadoActual);
+                const coincideMes = (mes === '') || (filaMes === mes);
+                const coincideAno = (ano === '') || (filaAno === ano);
+
+                fila.style.display = (coincideEstado && coincideMes && coincideAno) ? 'table-row' : 'none';
+            });
         }
 
-        document.getElementById('filtroMes').addEventListener('change', () => {
-            redirigirConFiltros('{{ request("estado", "todos") }}');
-        });
+        function filtrarEstado(estadoSeleccionado) {
+            estadoActual = estadoSeleccionado.trim().toLowerCase();
+            aplicarFiltros();
+        }
 
-        document.getElementById('filtroYear').addEventListener('change', () => {
-            redirigirConFiltros('{{ request("estado", "todos") }}');
+        function filtrarFecha() {
+            aplicarFiltros();
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            aplicarFiltros();
+            document.getElementById('filtroMes').addEventListener('change', filtrarFecha);
+            document.getElementById('filtroYear').addEventListener('change', filtrarFecha);
         });
     </script>
 </x-app-layout>
