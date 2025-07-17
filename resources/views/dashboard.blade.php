@@ -219,7 +219,7 @@
                                         <input type="checkbox" class="form-checkbox row-checkbox" value="{{ $noticia->id }}">
                                     </td>
                                     <td class="px-4 py-2 text-gray-800 dark:text-gray-100 copy-cell">
-                                        <span>{{ $noticia->estado }}</span>
+                                        <span>{{ $noticia->id }}</span>
                                         <span class="copy-icon" onclick="copyToClipboard('{{ $noticia->id }}')">
                                             <i class="fas fa-copy"></i>
                                         </span>
