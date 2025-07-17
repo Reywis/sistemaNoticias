@@ -199,6 +199,9 @@
                         <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                             @foreach ($noticias as $noticia)
                             @php $dt = \Carbon\Carbon::parse($noticia->fecha_inicio); @endphp
+                              <td class="px-4 py-2 text-center">
+                                        <input type="checkbox" class="form-checkbox row-checkbox" value="{{ $noticia->id }}">
+                                    </td>
                                 {{-- <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition"> --}}
                                     <tr data-mes="{{ $dt->month }}" data-year="{{ $dt->year }}" data-estado="{{ strtolower($noticia->estado) }}"
                                         @if($noticia->estado == 'requerido')
@@ -214,9 +217,7 @@
                                         @endif
                                     >
                                     {{-- <tr class=" hover:bg-gray-50 dark:hover:bg-gray-700 transition"> --}}
-                                    <td class="px-4 py-2 text-center">
-                                        <input type="checkbox" class="form-checkbox row-checkbox" value="{{ $noticia->id }}">
-                                    </td>
+
                                     <td class="px-4 py-2 text-gray-800 dark:text-gray-100 copy-cell">
                                         <span>{{ $noticia->estado }}</span>
                                         <span class="copy-icon" onclick="copyToClipboard('{{ $noticia->id }}')">
