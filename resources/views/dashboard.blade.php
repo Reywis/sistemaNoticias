@@ -180,7 +180,7 @@
                                 <th class="px-4 py-2">
                                     <input type="checkbox" id="select_all" class="form-checkbox">
                                 </th>
-                                <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Código</th>
+                                {{-- <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Código</th> --}}
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Fecha Registrada</th>
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Centro</th>
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Teléfonos</th>
@@ -218,12 +218,12 @@
                                     <td class="px-4 py-2 text-center">
                                         <input type="checkbox" class="form-checkbox row-checkbox" value="{{ $noticia->id }}">
                                     </td>
-                                    <td class="px-4 py-2 text-gray-800 dark:text-gray-100 copy-cell">
+                                    {{-- <td class="px-4 py-2 text-gray-800 dark:text-gray-100 copy-cell">
                                         <span>{{ $noticia->id }}</span>
                                         <span class="copy-icon" onclick="copyToClipboard('{{ $noticia->id }}')">
                                             <i class="fas fa-copy"></i>
                                         </span>
-                                    </td>
+                                    </td> --}}
                                      <td class="px-4 py-2 text-gray-800 dark:text-gray-100 copy-cell">
                                         <span>{{ $noticia->created_at  }}</span>
                                         <span class="copy-icon" onclick="copyToClipboard('{{ $noticia->created_at }}')">
