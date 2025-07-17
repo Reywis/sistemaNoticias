@@ -181,6 +181,7 @@
                                     <input type="checkbox" id="select_all" class="form-checkbox">
                                 </th>
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Código</th>
+                                <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Fecha Registrada</th>
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Centro</th>
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Teléfonos</th>
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-200">Curso</th>
