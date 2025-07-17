@@ -224,7 +224,7 @@
                                         </span>
                                     </td>
                                      <td class="px-4 py-2 text-gray-800 dark:text-gray-100 copy-cell">
-                                        <span>{{ $noticia->estado }}</span>
+                                        <span>{{ $noticia->created_at  }}</span>
                                         <span class="copy-icon" onclick="copyToClipboard('{{ $noticia->created_at }}')">
                                             <i class="fas fa-copy"></i>
                                         </span>
